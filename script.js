@@ -227,13 +227,15 @@ function perform() {
             EX: 6 * 9 / 2
                    54 / 2
             */
-            if (expression[operations[i] + 2] === "*" || expression[operations[i] + 2] === "/") {
+            while (expression[operations[i] + 2] === "*" || expression[operations[i] + 2] === "/") {
                 if (expression[operations[i] + 2] === "*") {
                     result = result * Number(expression[operations[i] + 3])
                 } else {
                     result = result / Number(expression[operations[i] + 3])
                 }
                 i++
+
+                
 
             }
 
@@ -246,7 +248,7 @@ function perform() {
             EX: 6 * 9 / 2
                    54 / 2
             */
-            if (expression[operations[i] + 2] === "*" || expression[operations[i] + 2] === "/") {
+            while (expression[operations[i] + 2] === "*" || expression[operations[i] + 2] === "/") {
                 if (expression[operations[i] + 2] === "*") {
                     result = result * Number(expression[operations[i] + 3])
                 } else {
@@ -264,6 +266,7 @@ function perform() {
     }
 
     //final loop
+    
 
     let lastWasMulDiv = false // this will be used to check whether the last operator was */ or not
 
