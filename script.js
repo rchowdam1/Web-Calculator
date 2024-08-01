@@ -122,13 +122,24 @@ equalButton.addEventListener('click', () => {
 
 
 function perform() {
-    let operatorMap = new Map() /* key: index | value: priority of operations
+    let expressionString = ""
+
+    for (let i = 0; i < expression.length; i++) {
+        expressionString += expression[i]
+    }
+
+    let answer = eval(expressionString)
+    console.log(answer)
+}
+
+//function perform() {
+    /*CURRENTLY USING let operatorMap = new Map() /* key: index | value: priority of operations
                                  +, - => 1
                                  *, / => 2
                                 */ 
 
 
-    let operations = []
+    /*CURRENTLY USING let operations = []
 
     for (let i = 1; i < expression.length; i = i + 2) {
         if (expression[i] === '+' || expression[i] === '-') {
@@ -151,14 +162,14 @@ function perform() {
 
     //sort keys according to order of operations
     //using selection sort
-    for (let i = 0; i < operations.length; i++) {
+    /*CURRENTLY USING for (let i = 0; i < operations.length; i++) {
         let smallestIndex = i
         for (let j = i + 1; j < operations.length; j++) {
             /*if (operations[j] < operations[smallestIndex]) {
                 smallestIndex = j
             }*/
 
-            if (operatorMap.get(operations[j]) > operatorMap.get(operations[smallestIndex])) {
+            /*CURRENTLY USINGif (operatorMap.get(operations[j]) > operatorMap.get(operations[smallestIndex])) {
                 smallestIndex = j
             }
         }
@@ -227,7 +238,7 @@ function perform() {
             EX: 6 * 9 / 2
                    54 / 2
             */
-            while (expression[operations[i] + 2] === "*" || expression[operations[i] + 2] === "/") {
+            /*CURRENTLY USING while (expression[operations[i] + 2] === "*" || expression[operations[i] + 2] === "/") {
                 if (expression[operations[i] + 2] === "*") {
                     result = result * Number(expression[operations[i] + 3])
                 } else {
@@ -248,7 +259,7 @@ function perform() {
             EX: 6 * 9 / 2
                    54 / 2
             */
-            while (expression[operations[i] + 2] === "*" || expression[operations[i] + 2] === "/") {
+            /*CURRENTLY USING while (expression[operations[i] + 2] === "*" || expression[operations[i] + 2] === "/") {
                 if (expression[operations[i] + 2] === "*") {
                     result = result * Number(expression[operations[i] + 3])
                 } else {
@@ -267,13 +278,85 @@ function perform() {
 
     //final loop
     
+    let expressionValue = 0
+    let lastWasMulDiv = false // this will be used to check whether the last operator was or not
 
-    let lastWasMulDiv = false // this will be used to check whether the last operator was */ or not
+    /*CURRENTLY USING for (let i = 1; i < expression.length; i = i + 2) {
 
-    for (let i = 1; i < expression.length; i = i + 2) {
+        if (i == 1) {
+            if (expression[i + 2] === '*' || expression[i + 2] === '/') {
+                //edit
+
+                if (expression[i] === '+') {
+                    mulDivOperands[0] = mulDivOperands[0] + Number(expression[0])
+                    expressionValue = expressionValue + mulDivOperands.shift()
+                } else if (expression[i] === '-') {
+                    mulDivOperands[0] = Number(expression[0]) - mulDivOperands[0]
+                    expressionValue = expressionValue + mulDivOperands.shift() 
+                }
+
+                i = i + 2
+                while (expression[i] === '*' || expression[i] === '/') {
+                    lastWasMulDiv = true
+
+                    if (i <= expression.length - 3) {
+                        i = i + 2
+                    } else {
+                        break
+                    }
+                }
+
+                
+            } else {
+                let firstNumber = Number(expression[0])
+                if (expression[i] === '+') {
+                    expressionValue = firstNumber + Number(expression[i + 1])
+                } else if (expression[i] === '-') {
+                    expressionValue = firstNumber - Number(expression[i + 1])
+                }
+            }
+
+            continue
+        }
+
+
+        while (expression[i] === '*' || expression[i] === '/') {
+            lastWasMulDiv = true
+
+            if (i <= expression.length - 3) {
+                i = i + 2
+            }
+
+            
+        }
+        
+        let currOperator = expression[i]
+
+        if (lastWasMulDiv) { //left operand is the */ /*CURRENTLY USING result, the right is the number to + or -
+            let polledNumber = mulDivOperands.shift()
+
+            if (currOperator === '+') {
+                expressionValue = expressionValue + polledNumber + Number(expression[i + 1])
+            } else if (currOperator === '-') {
+                expressionValue = expressionValue + polledNumber - Number(expression[i + 1])
+            }
+            lastWasMulDiv = false
+        } else {
+
+            if (currOperator === '+') {
+                expressionValue = expressionValue + Number(expression[i + 1])
+            } else if (currOperator === '-') {
+                expressionValue = expressionValue - Number(expression[i + 1])
+            }
+        }
+
         
     }
 
+    
+    console.log(expressionValue + " - calculated answer")
+
 
     
-}
+}*/
+    
