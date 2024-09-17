@@ -24,8 +24,6 @@ numbers.forEach((number) => {
         }
 
         operandOne = operandOne + number.innerHTML
-        //console.log(operandOne)
-
 
     })
 })
@@ -103,7 +101,6 @@ equalButton.addEventListener('click', () => {
             console.log(expression)
             perform()
             return
-            //resume here 7/8 | test this expression: 65 + 8
         }
 
         console.log(expression + " Expression must contain valid number of operands. Length of expression is " + expression.length)
