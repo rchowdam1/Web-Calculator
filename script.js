@@ -10,9 +10,8 @@ const answerNumber = document.getElementById("expressionAnswer")
 
 let expression = [] 
 let operandOne = ""
-let answer = null // resume here do 6 * 6 + 6
+let answer = null 
 let recentOperator = 1 // 1 for plus, 2 for minus, 3 for mul, 4 for div
-//let operations = ""
 
 
 // variables for equal button functionality
