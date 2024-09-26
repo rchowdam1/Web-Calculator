@@ -6,9 +6,12 @@ const plusButton = document.querySelector('.plus')
 const minusButton = document.querySelector('.subtract')
 const timesButton = document.querySelector('.multiply')
 const divideButton = document.querySelector('.divide')
+const answerNumber = document.getElementById("expressionAnswer")
 
-let expression = [] // holds the expression typed into the calculator (resume here 7/2)
+let expression = [] 
 let operandOne = ""
+let answer = null // resume here do 6 * 6 + 6
+let recentOperator = 1 // 1 for plus, 2 for minus, 3 for mul, 4 for div
 //let operations = ""
 
 
@@ -24,6 +27,7 @@ numbers.forEach((number) => {
         }
 
         operandOne = operandOne + number.innerHTML
+        answerNumber.innerHTML = operandOne
 
     })
 })
@@ -31,6 +35,8 @@ numbers.forEach((number) => {
 clearButton.addEventListener('click', () => {
     operandOne = ""
     expression = []
+    answerNumber.innerHTML = "0"
+    answer = null
 })
 
 plusButton.addEventListener('click', () => {
@@ -43,6 +49,7 @@ plusButton.addEventListener('click', () => {
     //expression.push(operandOne)
     expression.push("+")
     operandOne = ""
+    recentOperator = 1
 })
 
 minusButton.addEventListener('click', () => {
@@ -54,6 +61,7 @@ minusButton.addEventListener('click', () => {
     //expression.push(operandOne)
     expression.push("-")
     operandOne = ""
+    recentOperator = 2
 })
 
 timesButton.addEventListener('click', () => {
@@ -65,6 +73,7 @@ timesButton.addEventListener('click', () => {
     //expression.push(operandOne)
     expression.push("*")
     operandOne = ""
+    recentOperator = 3
 })
 
 divideButton.addEventListener('click', () => {
@@ -74,9 +83,36 @@ divideButton.addEventListener('click', () => {
     }
     expression.push("/")
     operandOne = ""
+    recentOperator = 4
 })
 
-equalButton.addEventListener('click', () => {   
+equalButton.addEventListener('click', () => { 
+    
+    if (answer) {
+
+        if (operandOne) {
+            expression.push(operandOne)
+        }
+
+        const lastNumber = expression[expression.length - 1]
+
+        console.log(expression)
+
+        if (recentOperator == 1) {
+            answer = answer + Number(lastNumber)
+        } else if (recentOperator == 2) {
+            answer = answer - Number(lastNumber)
+        } else if (recentOperator == 3) {
+            answer = answer * Number(lastNumber)
+        } else if (recentOperator == 4) {
+            answer = answer / Number(lastNumber)
+        }
+
+        console.log(answer)
+        answerNumber.innerHTML = answer
+        return
+    }
+    
     /*
     * if the equals button is clicked and the expression contains the same amount of numbers as operators
     * then the expression is not valid
@@ -125,7 +161,8 @@ function perform() {
         expressionString += expression[i]
     }
 
-    let answer = eval(expressionString)
+    answer = Number(eval(expressionString))
     console.log(answer)
+    answerNumber.innerHTML = answer
 }
     
